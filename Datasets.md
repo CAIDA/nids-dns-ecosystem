@@ -91,13 +91,16 @@ conf.set("fs.s3a.impl",                       "org.apache.hadoop.fs.s3a.S3AFileS
 conf.set("fs.s3a.aws.credentials.provider",   "org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider")
 conf.set("fs.s3a.endpoint",                   OI_ENDPOINT)
 conf.set("fs.s3a.connection.ssl.enabled",     "true")
-conf.set("fs.s3a.signing-algorithm",          "S3SignerType")
 conf.set("fs.s3a.path.style.access",          "true")
 conf.set("fs.s3a.block.size",                 "64M")
 conf.set("fs.s3a.readahead.range",            "4M")
 conf.set("spark.sql.parquet.mergeSchema",     "false")
 conf.set("spark.sql.parquet.filterPushdown",  "true")
-
+conf.set(
+    "spark.jars.packages",
+    "org.apache.hadoop:hadoop-aws:3.4.0,"
+    "software.amazon.awssdk:bundle:2.24.6"
+)
 spark = SparkSession.builder.config(conf=conf).getOrCreate()
 ```
 
