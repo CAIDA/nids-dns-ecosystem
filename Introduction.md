@@ -7,6 +7,7 @@
 - [OpenINTEL Project](https://openintel.nl) — the DNS measurement platform used in this module
 - [OpenINTEL Zone-Based Measurements](https://openintel.nl/data/forward-dns/zone-based/) — technical background on the measurement methodology and how to download the original dataset.
 - [OpenINTEL Data Dictionary](https://openintel.nl/data/dictionary/) — field-level description of all record types in the dataset
+- [OpenINTEL-Spark - CAIDA.pdf](OpenINTEL-Spark%20-%20CAIDA.pdf) — guide to accessing OpenINTEL data via PySpark on the NRP JupyterHub environment
 - [LACeS Anycast Census](https://manycast.net) — the anycast detection dataset used in Task 2
 
 ---

@@ -8,11 +8,14 @@ Complete the tasks below in order. All tasks are performed inside [nids-dns-ecos
 
 ## Task 0: Setup and Data Access
 
-Download at least one OpenINTEL snapshot for `.se` (or `.gov` for a smaller first test) and place it in the `data/` directory. For the longitudinal tasks, download one snapshot per year (e.g., January 15th of each year, 2019–2024).
+All work is done inside the **PySpark environment on NRP's JupyterHub** — do not run this notebook on a local machine, as data is read directly from OpenINTEL's S3 object store and requires a Spark cluster.
 
-- [ ] Download an OpenINTEL snapshot from [data.openintel.nl](https://data.openintel.nl/download/forward-dns/basis=zonefile/)
-- [ ] Run the setup cell in the notebook to install dependencies
-- [ ] Verify that the SparkSession starts and can read the OpenINTEL data
+- step 1. Access NRP's JupyterHub: [https://jupyterhub-west.nrp-nautilus.io](https://jupyterhub-west.nrp-nautilus.io)
+  - Detailed access instructions: [How to access NRP](https://www.caida.org/projects/nids/how-to/access-nrp/)
+  - When spawning your server, select the **PySpark** image/profile
+- step 2. Upload `nids-dns-ecosystem.ipynb` and run the setup cell to install dependencies
+- [ ] Verify that the SparkSession starts and can connect to OpenINTEL's S3 endpoint
+- [ ] Run the example count query (SOA records per year) to confirm data access
 
 ---
 
