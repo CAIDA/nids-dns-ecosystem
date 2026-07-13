@@ -1,4 +1,4 @@
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Tasks ⮕ | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | Tasks ⮕ | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Tasks
 
@@ -122,4 +122,4 @@ Repeat the DNSSEC, CAA, and SPF adoption computation for annual snapshots. Plot 
 - [ ] **Q17** Which security mechanism has grown fastest? Are there any inflection points — years where adoption accelerated — and can you identify a plausible cause?
 - [ ] **Q18** Is DNSSEC adoption correlated with CAA adoption at the domain level? Compute the overlap: what fraction of DNSSEC-signed domains also have a CAA record?
 
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Tasks ⮕ | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | Tasks ⮕ | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)

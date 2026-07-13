@@ -1,4 +1,4 @@
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | Task 3 ⮕ | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | Task 3 ⮕ | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Task 3 Guidance: DNS Security Best Practices
 
@@ -222,4 +222,4 @@ n_both = ds_names.join(caa_names, "query_name", "inner").count()
 print(f"Domains with DNSSEC + CAA: {n_both} ({n_both/n_ds:.1%} of DNSSEC-signed domains)")
 ```
 
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | Task 3 ⮕ | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | Task 3 ⮕ | [Notebook](nids-dns-ecosystem.ipynb)

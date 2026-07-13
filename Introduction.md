@@ -1,4 +1,4 @@
-[README](README.md) | Introduction ⮕ | [Datasets](Datasets.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | Introduction ⮕ | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Introduction and Background
 
@@ -106,4 +106,4 @@ The trailing **qualifier** sets the policy for unlisted senders:
 
 CAA records (RFC 8659) allow domain owners to specify which Certificate Authorities (CAs) are permitted to issue TLS certificates for the domain. If a CA encounters a CAA record listing only specific CAs (e.g., `letsencrypt.org`), it must not issue a certificate unless it is listed. The `issue` tag restricts issuance; `issuewild` restricts wildcard issuance; a value of `;` prohibits all issuance from that CA.
 
-[README](README.md) | Introduction ⮕ | [Datasets](Datasets.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | Introduction ⮕ | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
