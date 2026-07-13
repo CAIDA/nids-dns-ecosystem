@@ -1,4 +1,4 @@
-[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Datasets
 
@@ -70,81 +70,7 @@ OpenINTEL data is stored in a public S3-compatible object store and is accessed 
 
 The partition columns `source`, `year`, `month`, and `day` are not stored inside the files — Spark infers them from the path when you pass a `basePath` option. Use them in `.filter()` calls for partition pruning.
 
-#### SparkSession setup
-
-```python
-import time
-from pyspark import SparkConf
-from pyspark.sql import SparkSession
-import pyspark.sql.functions as psf
-
-OI_ENDPOINT  = "https://object.openintel.nl"
-OI_BUCKET    = "openintel-public"
-OI_FDNS_BASE = "fdns/basis=zonefile"
-
-conf = SparkConf()
-conf.setMaster("local[*]")
-conf.setAppName(f"dns-ecosystem-{int(time.time())}")
-conf.set("spark.executor.memory", "4G")
-conf.set("spark.driver.memory", "4G")
-conf.set("fs.s3a.impl",                       "org.apache.hadoop.fs.s3a.S3AFileSystem")
-conf.set("fs.s3a.aws.credentials.provider",   "org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider")
-conf.set("fs.s3a.endpoint",                   OI_ENDPOINT)
-conf.set("fs.s3a.connection.ssl.enabled",     "true")
-conf.set("fs.s3a.path.style.access",          "true")
-conf.set("fs.s3a.block.size",                 "64M")
-conf.set("fs.s3a.readahead.range",            "4M")
-conf.set("spark.sql.parquet.mergeSchema",     "false")
-conf.set("spark.sql.parquet.filterPushdown",  "true")
-conf.set(
-    "spark.jars.packages",
-    "org.apache.hadoop:hadoop-aws:3.4.0,"
-    "software.amazon.awssdk:bundle:2.24.6"
-)
-spark = SparkSession.builder.config(conf=conf).getOrCreate()
-```
-
-#### Loading a single snapshot
-
-```python
-SOURCE = "gov"   # start with .gov (~15 MB/day) to prototype; switch to .se (~1 GB/day) for full analysis
-
-base = f"s3a://{OI_BUCKET}/{OI_FDNS_BASE}"
-snap_path = f"{base}/source={SOURCE}/year=2024/month=01/day=15"
-
-df_snap = spark.read.option("basePath", base + "/").parquet(snap_path)
-df_snap.printSchema()
-```
-
-#### Loading multiple years (longitudinal)
-
-Because the `year` column is a Hive-style partition, loading several years at once is one `spark.read` call. Spark performs **partition pruning** automatically.
-
-```python
-YEARS   = [2019, 2020, 2021, 2022, 2023, 2024]
-long_paths = [f"{base}/source={SOURCE}/year={y}/month=01/day=15" for y in YEARS]
-
-df_long = spark.read.option("basePath", base + "/").parquet(*long_paths)
-# df_long.columns includes 'year', 'month', 'day', 'source' from the partition path
-```
-
-#### Filtering and aggregating
-
-```python
-# Count registered domains per year (SOA appears exactly once per registered domain)
-df_long.filter(psf.col("response_type") == "SOA") \
-       .groupBy("year") \
-       .agg(psf.count("query_name").alias("domain_count")) \
-       .orderBy("year").show()
-```
-
-#### Collecting to pandas for plotting
-
-All Spark aggregations produce small result DataFrames that are collected to the driver with `.toPandas()` for visualization with `matplotlib`. **Never call `.toPandas()` on a large unfiltered DataFrame** — only on the final aggregated result.
-
-```python
-result_pd = df_long.filter(...).groupBy(...).agg(...).orderBy("year").toPandas()
-```
+See [Spark](Spark.md) for SparkSession setup, loading snapshots and longitudinal ranges, filtering/aggregating, and the `.toPandas()` rule (never call it on a large, unfiltered DataFrame — only on a final aggregated result).
 
 > **TLD size guidance**: `.gov` (~25 k domains/day) and `.li` (~85 k) are ideal for development. `.se` (~1 M) and `.fr` (~4 M) are larger — these are better suited to running on a cluster (e.g., NRP's JupyterHub) rather than a laptop.
 
@@ -161,39 +87,21 @@ The census reports results at **/24 prefix granularity**. Each row represents a 
 
 ### Confidence Filtering
 
+The live export reports AB and GCD scores **per probe method** rather than as
+a single combined column each, so the documented filter is applied across the
+`greatest()` of each family:
+
 | Filter | Use case |
 |--------|----------|
-| `(AB > 3) \| (GCD > 1)` | **High confidence** — recommended for research |
-| `(AB > 1) \| (GCD > 1)` | **Comprehensive** — maximises coverage, includes borderline cases |
+| `(max(AB_*) > 3) \| (max(GCD_*) > 1)` | **High confidence** — recommended for research |
+| `(max(AB_*) > 1) \| (max(GCD_*) > 1)` | **Comprehensive** — maximises coverage, includes borderline cases |
 
 ### Loading the Census with Spark
 
-The census is a small file (~a few MB). Download it once to a local path, then load it into Spark.
-
-```python
-import requests
-
-ANYCAST_URL   = "https://manycast.net/api/v1/export/IPv4-latest.parquet"
-ANYCAST_LOCAL = "/tmp/anycast-census.parquet"
-
-resp = requests.get(ANYCAST_URL, timeout=60)
-resp.raise_for_status()
-with open(ANYCAST_LOCAL, "wb") as f:
-    f.write(resp.content)
-
-census_df = spark.read.parquet(ANYCAST_LOCAL)
-census_df.printSchema()
-
-# Collect high-confidence anycast /24s to the driver as a Python set
-# (small enough to fit in memory; used for lookups in Task 2)
-anycast_set = set(
-    census_df.filter((psf.col("AB") > 3) | (psf.col("GCD") > 1))
-             .select("prefix")
-             .rdd.flatMap(lambda r: [r[0]])
-             .collect()
-)
-print(f"Anycast /24 prefixes (high confidence): {len(anycast_set)}")
-```
+The census is a small file (~a few MB), downloaded once to a local path and
+loaded into Spark. See [Spark](Spark.md#7-broadcast-variables) for the full
+loading + broadcast pattern used to cross-reference it against resolved NS
+IPs in Task 2.
 
 Full API documentation: [https://manycast.net/api/docs](https://manycast.net/api/docs)
 
@@ -202,8 +110,11 @@ Full API documentation: [https://manycast.net/api/docs](https://manycast.net/api
 | Field | Description |
 |-------|-------------|
 | `prefix` | /24 prefix string (e.g., `1.2.3.0/24`) |
-| `AB` | Anycast-Based score (number of distinct vantage points responding) |
-| `GCD` | 1 if latency-based method detected anycast, 0 otherwise |
+| `AB_ICMPv4` | Anycast-Based score from ICMP probing (IPv4) |
+| `AB_TCPv4` | Anycast-Based score from TCP probing (IPv4) |
+| `AB_DNSv4` | Anycast-Based score from DNS probing (IPv4) |
+| `GCD_ICMPv4` | 1 if the ICMP latency-based method detected anycast, 0 otherwise |
+| `GCD_TCPv4` | 1 if the TCP latency-based method detected anycast, 0 otherwise |
 | `asn` | ASN of the prefix |
 | `as_name` | Human-readable AS name |
 
@@ -229,4 +140,4 @@ def resolve_hostname(hostname, rdtype="A", timeout=5):
 
 The resolved hostname→IP mapping is then broadcast to all Spark workers as a `pyspark.broadcast` variable so it can be used efficiently in Spark UDFs without re-resolving on every row.
 
-[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)

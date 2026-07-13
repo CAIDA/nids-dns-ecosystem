@@ -1,4 +1,4 @@
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Tasks](Tasks.md) | Task 1 ⮕ | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | Task 1 ⮕ | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Task 1 Guidance: DNS Hosting Centralization
 
@@ -164,4 +164,4 @@ for year, grp in year_provider_counts.groupby("year"):
     year_stats[year] = {"hhi": hhi_y, "top3_share": top3}
 ```
 
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Tasks](Tasks.md) | Task 1 ⮕ | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | Task 1 ⮕ | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)

@@ -1,4 +1,4 @@
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | Task 2 ⮕ | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | Task 2 ⮕ | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Task 2 Guidance: DNS Infrastructure Resilience & Anycast
 
@@ -156,4 +156,4 @@ provider_anycast = (
 provider_anycast.show(20)
 ```
 
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | Task 2 ⮕ | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | Task 2 ⮕ | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
