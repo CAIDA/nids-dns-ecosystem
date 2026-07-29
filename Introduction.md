@@ -10,6 +10,10 @@
 - [OpenINTEL-Spark - CAIDA.pdf](OpenINTEL-Spark%20-%20CAIDA.pdf) — OpenINTEL data and Spark presentation
 - [LACeS Anycast Census](https://manycast.net) — the anycast detection dataset used in Task 2
 
+### Prerequisite NIDS Assignments
+
+- None — this module is self-contained and does not depend on material from other NIDS assignments.
+
 ---
 
 ## The Domain Name System at Scale
