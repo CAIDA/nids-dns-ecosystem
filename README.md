@@ -6,6 +6,10 @@ README ⮕ | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark]
 
 The goal of this assignment is to understand how the Domain Name System (DNS) is structured at Internet scale: who hosts it, how resilient it is to failures, whether anycast is deployed, and how broadly DNS-based security mechanisms have been adopted. You will work with active DNS measurement data from **OpenINTEL** project and active anycast detection data from the **Anycast Census** (LACeS) to answer these questions both for a single snapshot and longitudinally over several years.
 
+## Slides
+
+- [ETP week 05 DNS](slides/ETP-Week-05-DNS.pptx)
+
 ## Overview
 
 Start by reading **Introduction** to get the conceptual background. **Datasets** explains each dataset and how to access it.
@@ -41,7 +45,7 @@ nids-dns-ecosystem
 - **CAA (Certification Authority Authorization)**: A DNS record type (RFC 8659) that restricts which Certificate Authorities are permitted to issue TLS certificates for a domain.
 - **DNSKEY**: A DNS record type that publishes the public key used to verify DNSSEC signatures for a zone.
 - **DNSSEC (DNS Security Extensions)**: A suite of IETF specifications (RFC 4033–4035) that adds cryptographic signatures to DNS responses, enabling resolvers to verify authenticity and integrity.
-- **DS (Delegation Signer)**: A DNS record placed at the *parent* zone that contains a hash of a DNSKEY record in the *child* zone, establishing the DNSSEC chain of trust downward from the root.
+- **DS (Delegation Signer)**: A DNS record placed at the _parent_ zone that contains a hash of a DNSKEY record in the _child_ zone, establishing the DNSSEC chain of trust downward from the root.
 - **LACeS / Anycast Census**: A longitudinal anycast detection system from the University of Twente that uses ICMP probing and latency analysis to identify anycast-announced /24 prefixes. Daily snapshots are available via [manycast.net](https://manycast.net). [[paper](https://doi.org/10.1145/3730567.3764484)]
 - **NS (Name Server)**: A DNS record type that delegates authority for a zone to a set of authoritative name servers.
 - **Registrable Domain**: The domain at one level below a public suffix — e.g., `cloudflare.com` extracted from `ns1.cloudflare.com`. Used here to identify which organisation operates a given nameserver.
