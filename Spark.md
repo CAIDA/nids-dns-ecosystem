@@ -286,8 +286,9 @@ for year, grp in provider_pd.groupby("year"):
   membership — see §6.
 - **Broadcast, don't re-ship, driver-side lookup dictionaries** used inside a
   UDF — see §7.
-- **Prototype on `.gov`, scale to `.se`/`.fr`.** `.gov` is ~15 MB/day and
-  iterates in seconds; switch `SOURCE` only once the query shape is right.
+- **Prototype on `.gov`, scale to `.se`/`.fr`.** `.gov` is ~7 MB/day (~11 k
+  domains) and iterates in seconds; switch `SOURCE` only once the query shape is
+  right. `.se` is the graded TLD — set `SOURCE = "se"` before your final run.
 - **Never `.toPandas()` an unfiltered DataFrame** — see §8.
 
 [README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Spark ⮕ | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)

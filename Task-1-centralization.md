@@ -43,7 +43,7 @@ extract_provider("ns-123.awsdns-45.com")     # → "awsdns-45.com"
 extract_provider("pdns1.registrar-servers.com")  # → "registrar-servers.com"
 ```
 
-> **Note on AWS**: Amazon Route 53 nameservers use hostnames like `ns-123.awsdns-45.com`, `ns-456.awsdns-12.net`, `ns-789.awsdns-34.org`, `ns-012.awsdns-56.co.uk`. Their registrable domains differ! You may want to post-process these to normalise them all to `amazon.com` or `route53.amazonaws.com`. One approach: if the hostname ends with `awsdns-*.com`, `awsdns-*.net`, `awsdns-*.org`, or `awsdns-*.co.uk`, return `amazonaws.com`.
+> **Note on AWS**: Amazon Route 53 nameservers use hostnames like `ns-123.awsdns-45.com`, `ns-456.awsdns-12.net`, `ns-789.awsdns-34.org`, `ns-012.awsdns-56.co.uk`. Their registrable domains differ! You may want to post-process these so all four collapse to a single provider label. One approach: if the hostname ends with `awsdns-*.com`, `awsdns-*.net`, `awsdns-*.org`, or `awsdns-*.co.uk`, return `amazonaws.com`. Whichever label you pick, use it consistently — otherwise Route 53's market share is split four ways and both the top-N ranking and the HHI come out too low.
 
 ---
 
@@ -136,21 +136,25 @@ df_long = load_longitudinal(SOURCE, YEARS)
 
 ns_long = (
     df_long.filter(psf.col("response_type") == "NS")
+           .select("year", "query_name", "ns_address")
+           .dropna()
            .withColumn("provider", extract_provider_udf(psf.col("ns_address")))
 )
 
-# Total domains per year
+# Total domains per year — distinct NS query_names, the same denominator the
+# snapshot code above uses. (Do not substitute the SOA population here; see the
+# denominator note in Datasets.md.)
 total_per_year = (
-    df_long.filter(psf.col("response_type") == "SOA")
-           .groupBy("year").agg(psf.count("query_name").alias("total"))
+    ns_long.select("year", "query_name").distinct()
+           .groupBy("year").agg(psf.countDistinct("query_name").alias("total"))
            .toPandas().set_index("year")["total"].to_dict()
 )
 
-# Per-year provider counts (collected to driver)
+# Per-year provider counts (collected to driver). No collect_set/explode round
+# trip is needed here: countDistinct("query_name") already counts each domain
+# once per provider, which is exactly what the explode was there to guarantee.
 year_provider_counts = (
-    ns_long.select("year", "query_name", explode("providers").alias("provider"))
-           # if you have domain_providers per year, use that instead
-           .groupBy("year", "provider")
+    ns_long.groupBy("year", "provider")
            .agg(psf.countDistinct("query_name").alias("domain_count"))
            .toPandas()
 )

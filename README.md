@@ -16,13 +16,15 @@ Start by reading **Introduction** to get the conceptual background. **Datasets**
 
 - step 1 [read the introduction](Introduction.md)
 - step 2 [read dataset overviews](Datasets.md)
-- step 3 [review the tasks](Tasks.md)
-- step 4 log into NRP's JupyterHub, upload and complete the nids-dns-ecosystem.ipynb
+- step 3 [read the Spark guide](Spark.md)
+- step 4 [review the tasks](Tasks.md)
+- step 5 log into NRP's JupyterHub, upload and complete the nids-dns-ecosystem.ipynb
   - Detailed instructions to access NRP: [How to access NRP](https://www.caida.org/projects/nids/how-to/access-nrp/)
   - complete each task by replacing the `# YOUR CODE HERE` sections
+  - set `SOURCE = "se"` for your final run — `.se` is the graded TLD
   - answer all questions
-- step 5 download your working notebook and replace ⬅ deliverable
-- step 6 commit and push to github
+- step 6 download your working notebook and replace ⬅ deliverable
+- step 7 commit and push to github
 
 ### Directory Structure
 
@@ -30,13 +32,20 @@ Start by reading **Introduction** to get the conceptual background. **Datasets**
 nids-dns-ecosystem
 ├- Introduction.md                          # Introduction and background
 ├- Datasets.md                              # Dataset overview and access instructions
+├- Spark.md                                 # PySpark building blocks for the queries
 ├- Tasks.md                                 # Task checklist and instructions
 ├- Task-1-centralization.md                 # Guidance for Task 1
 ├- Task-2-resilience.md                     # Guidance for Task 2
 ├- Task-3-security.md                       # Guidance for Task 3
-├- data/                                    # Place downloaded OpenIntel parquet files here
+├- openintel_csv/                           # Generated schema / partition-size reference
+├- slides/                                  # Lecture slides
+├- OpenINTEL-Spark - CAIDA.pdf              # OpenINTEL data and Spark presentation
 ├- nids-dns-ecosystem.ipynb             ⬅  # Complete / Commit / Push
 ```
+
+OpenINTEL data is read directly from a public S3 object store — there is nothing
+to download by hand and no credentials to configure. The one local download is
+the Anycast Census, which the notebook fetches to `/tmp` for you.
 
 ### Glossary
 
@@ -51,6 +60,6 @@ nids-dns-ecosystem
 - **Registrable Domain**: The domain at one level below a public suffix — e.g., `cloudflare.com` extracted from `ns1.cloudflare.com`. Used here to identify which organisation operates a given nameserver.
 - **SOA (Start of Authority)**: A mandatory DNS record type that stores administrative information about a zone, including timing parameters (refresh, retry, expire, minimum TTL) that govern secondary name server behaviour.
 - **SPF (Sender Policy Framework)**: An email authentication mechanism (RFC 7208) published via TXT DNS records that specifies which mail servers are authorised to send email on behalf of a domain.
-- **Zone File**: A text representation of all resource records in a DNS zone. Registries make zone files available; OpenIntel uses them as the seed list for its measurements.
+- **Zone File**: A text representation of all resource records in a DNS zone. Registries make zone files available; OpenINTEL uses them as the seed list for its measurements.
 
 README ⮕ | [Introduction](Introduction.md) | [Datasets](Datasets.md) | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)

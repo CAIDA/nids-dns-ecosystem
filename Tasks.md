@@ -17,6 +17,11 @@ All work is done inside the **PySpark environment on NRP's JupyterHub** — do n
 - [ ] Verify that the SparkSession starts and can connect to OpenINTEL's S3 endpoint
 - [ ] Run the example count query (SOA records per year) to confirm data access
 
+> **Choose your TLD.** The notebook ships with `SOURCE = "gov"` because `.gov` is
+> small (~11 k domains) and iterates in seconds — prototype every query there
+> first. **`.se` is the graded TLD**: set `SOURCE = "se"` and re-run the whole
+> notebook before you submit.
+
 ---
 
 ## Task 1: DNS Hosting Centralization
@@ -31,7 +36,7 @@ Load the OpenINTEL snapshot and extract NS records. Inspect the data to understa
 
 Map each NS hostname to its **registrable domain** (the DNS hosting provider) using `tldextract`. Build a mapping from each domain to the set of providers it uses, and count how many domains each provider serves.
 
-- [ ] **Q1** How many unique DNS hosting providers are there? What does the long tail of the CCDF suggest about the market structure?
+- [ ] **Q1** How many unique DNS hosting providers are there? What does the tail of the distribution suggest about the market structure?
 
 ### Task 1.3 — Market share and HHI
 
