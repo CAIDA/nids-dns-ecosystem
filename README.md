@@ -30,6 +30,7 @@ Start by reading **Introduction** to get the conceptual background. **Datasets**
 nids-dns-ecosystem
 ├- Introduction.md                          # Introduction and background
 ├- Datasets.md                              # Dataset overview and access instructions
+├- Spark.md                                 # PySpark guide: queries, joins, broadcast vars
 ├- Tasks.md                                 # Task checklist and instructions
 ├- Task-1-centralization.md                 # Guidance for Task 1
 ├- Task-2-resilience.md                     # Guidance for Task 2
