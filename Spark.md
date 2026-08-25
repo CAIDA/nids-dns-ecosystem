@@ -31,8 +31,8 @@ OI_FDNS_BASE = "fdns/basis=zonefile"
 conf = SparkConf()
 conf.setMaster("local[*]")
 conf.setAppName(f"dns-ecosystem-{int(time.time())}")
-conf.set("spark.executor.memory",                      "4G")
-conf.set("spark.driver.memory",                        "4G")
+conf.set("spark.executor.memory",                      "8G")
+conf.set("spark.driver.memory",                        "8G")
 conf.set("fs.s3a.impl",                                "org.apache.hadoop.fs.s3a.S3AFileSystem")
 conf.set("fs.s3a.aws.credentials.provider",            "org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider")
 conf.set("fs.s3a.endpoint",                            OI_ENDPOINT)
@@ -286,8 +286,9 @@ for year, grp in provider_pd.groupby("year"):
   membership — see §6.
 - **Broadcast, don't re-ship, driver-side lookup dictionaries** used inside a
   UDF — see §7.
-- **Prototype on `.gov`, scale to `.se`/`.fr`.** `.gov` is ~15 MB/day and
-  iterates in seconds; switch `SOURCE` only once the query shape is right.
+- **Iterate on `.gov`, submit on `.se`.** `.gov` is ~15 MB/day and iterates in
+  seconds, so debug your query shape there; then set `SOURCE = "se"` and re-run
+  every cell — `.se` is the graded dataset (see [Datasets](Datasets.md)).
 - **Never `.toPandas()` an unfiltered DataFrame** — see §8.
 
 [README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Spark ⮕ | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)

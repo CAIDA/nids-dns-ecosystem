@@ -23,7 +23,7 @@ OpenINTEL measures many TLDs. A subset are **open access** — no registration r
 | `.sk` | 2022-05-11 | Slovakia |
 | `.fr` | 2022-08-10 | France (~4 M domains) |
 
-For this assignment, **`.se`** is recommended for its size (large enough to be statistically meaningful, small enough to process on a laptop), historical coverage (2016–present), and general-purpose domain mix. Use **`.gov`** if you want a smaller dataset to prototype your code first.
+**This assignment is graded on `.se`.** Your submitted notebook must contain a complete run with `SOURCE = "se"` — it is large enough to be statistically meaningful, has historical coverage back to 2016, and has a general-purpose domain mix. While you are developing, iterate against a smaller TLD such as `.gov` (~25 k domains) or `.li` (~85 k) so each cell returns in seconds — then set `SOURCE = "se"` and re-run everything before you submit. Results computed on any other TLD will not match the answer key.
 
 ### Data Format
 
@@ -72,7 +72,7 @@ The partition columns `source`, `year`, `month`, and `day` are not stored inside
 
 See [Spark](Spark.md) for SparkSession setup, loading snapshots and longitudinal ranges, filtering/aggregating, and the `.toPandas()` rule (never call it on a large, unfiltered DataFrame — only on a final aggregated result).
 
-> **TLD size guidance**: `.gov` (~25 k domains/day) and `.li` (~85 k) are ideal for development. `.se` (~1 M) and `.fr` (~4 M) are larger — these are better suited to running on a cluster (e.g., NRP's JupyterHub) rather than a laptop.
+> **TLD size guidance**: all work runs on NRP's Spark cluster (see [Tasks](Tasks.md)), which handles `.se` (~1 M domains) comfortably. `.gov` (~25 k domains/day) and `.li` (~85 k) are useful for fast iteration while debugging a query; `.fr` (~4 M) is larger than this assignment needs.
 
 ---
 

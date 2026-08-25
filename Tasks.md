@@ -16,6 +16,7 @@ All work is done inside the **PySpark environment on NRP's JupyterHub** — do n
 - step 2. Upload `nids-dns-ecosystem.ipynb` and run the setup cell to install dependencies
 - [ ] Verify that the SparkSession starts and can connect to OpenINTEL's S3 endpoint
 - [ ] Run the example count query (SOA records per year) to confirm data access
+- [ ] Confirm the dataset cell has `SOURCE = "se"` — the graded dataset (see [Datasets](Datasets.md))
 
 ---
 
@@ -26,6 +27,8 @@ Detailed guidance: [Task 1 — Centralization](Task-1-centralization.md)
 ### Task 1.1 — Load and inspect NS records
 
 Load the OpenINTEL snapshot and extract NS records. Inspect the data to understand its structure.
+
+> **Dataset**: graded results must use `SOURCE = "se"`. You may iterate on a smaller TLD (`.gov`, `.li`) while developing — see [Datasets](Datasets.md) — but re-run everything on `.se` before submitting.
 
 ### Task 1.2 — Extract DNS providers
 
