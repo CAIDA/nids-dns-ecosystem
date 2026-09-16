@@ -8,7 +8,7 @@ Complete the tasks below in order. All tasks are performed inside [nids-dns-ecos
 
 ## Task 0: Setup and Data Access
 
-All work is done inside the **PySpark environment on NRP's JupyterHub** — do not run this notebook on a local machine, as data is read directly from OpenINTEL's S3 object store and requires a Spark cluster.
+This module runs its queries under **Spark**, which needs a Java runtime — the one prerequisite the setup tooling cannot install for you. **NRP's JupyterHub already has one**, which makes it the path of least setup, and the instructions below assume it. On your own machine, install a JDK (17 or newer) first; Spark runs in local mode here, so no cluster is involved, and the OpenINTEL data is public and needs no credentials. Windows additionally wants `winutils.exe` and `HADOOP_HOME` set, which is Spark's own requirement rather than this assignment's.
 
 - step 1. Access NRP's JupyterHub: [https://jupyterhub-west.nrp-nautilus.io](https://jupyterhub-west.nrp-nautilus.io)
   - Detailed access instructions: [How to access NRP](https://www.caida.org/projects/nids/how-to/access-nrp/)

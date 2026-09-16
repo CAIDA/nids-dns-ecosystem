@@ -18,13 +18,45 @@ Start by reading **Introduction** to get the conceptual background. **Datasets**
 - step 2 [read dataset overviews](Datasets.md)
 - step 3 [read the Spark guide](Spark.md)
 - step 4 [review the tasks](Tasks.md)
-- step 5 log into NRP's JupyterHub, upload and complete the nids-dns-ecosystem.ipynb
-  - Detailed instructions to access NRP: [How to access NRP](https://www.caida.org/projects/nids/how-to/access-nrp/)
+- step 5 set the module up on the hub (see "Running this module" below)
+- step 6 launch Jupyter and complete nids-dns-ecosystem.ipynb
   - complete each task by replacing the `# YOUR CODE HERE` sections
   - set `SOURCE = "se"` for your final run — `.se` is the graded TLD
   - answer all questions
-- step 6 download your working notebook and replace ⬅ deliverable
-- step 7 commit and push to github
+- step 7 download your working notebook and replace ⬅ deliverable
+- step 8 commit and push to github
+
+### Running this module
+
+This module runs on the NRP JupyterHub — [How to access NRP](https://www.caida.org/projects/nids/how-to/access-nrp/)
+covers getting an account and a namespace.
+
+**At spawn, select the `Pyspark` image.** This module's queries run under Spark, which needs a Java
+runtime; the default preset image does not have one, and picking it fails at the first Spark cell
+with `JAVA_HOME is not set`. The image is fixed once the server starts, so if you pick the wrong
+one, stop the server from the JupyterHub control panel and start a new one.
+
+Its environment is built by [`nids-setup`](https://github.com/CAIDA/nids-setup), the same tool that
+sets up every other NIDS module — from a terminal inside your notebook server:
+
+```bash
+git clone https://github.com/CAIDA/nids-setup.git     # beside this repo
+cd nids-setup
+./setup.sh --nrp --release all --assignment DNS
+```
+
+On the hub the image already supplies the packages, so this clones the module rather than building
+an environment. `--release all` is needed because this module ships in the `later` tier, not in
+`r1`. Once that is done:
+
+```bash
+jupyter lab nids-dns-ecosystem/nids-dns-ecosystem.ipynb
+```
+
+No data download is required. The notebook reads OpenINTEL's Parquet directly from the public
+`openintel-public` object store over S3A, anonymously and with no credentials — see
+[Datasets](Datasets.md#accessing-the-data-via-spark). Spark resolves its S3A jars from Maven
+Central the first time a session starts, which makes the first run slower than later ones.
 
 ### Directory Structure
 
