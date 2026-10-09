@@ -1,0 +1,11 @@
+column_name,data_type
+prefix,string
+AB_ICMPv4,bigint
+AB_TCPv4,bigint
+AB_DNSv4,bigint
+GCD_ICMPv4,bigint
+GCD_TCPv4,bigint
+partial,boolean
+locations,"array<struct<id:string,city:string,country_code:string,lat:double,lon:double,candidate_diameter:bigint,num_constraints:bigint>>"
+backing_prefix,string
+ASN,string

@@ -56,7 +56,7 @@ Key fields used in this assignment:
 | `soa_minimum` | LONG | SOA minimum TTL / negative caching TTL |
 | `ad_flag` | INTEGER | 1 if the response was DNSSEC-validated by the worker's resolver |
 
-The table above is a curated subset. The full schema is roughly 100 columns; [openintel_csv/openintel_data_dictionary.md](openintel_csv/openintel_data_dictionary.md) lists every one of them alongside a per-`response_type` matrix showing which fields are actually populated for which record type — useful when deciding what to `.select()`. Regenerate it with `nids-spark-info.ipynb`.
+The table above is a curated subset. The full schema is roughly 100 columns; [openintel_csv/openintel_data_dictionary.md](openintel_csv/openintel_data_dictionary.md) lists every one of them alongside a per-`response_type` matrix showing which fields are actually populated for which record type — useful when deciding what to `.select()`. The same directory has the partition sizes and the Anycast Census columns as CSVs. Instructors regenerate these files with `nids-spark-info.ipynb` in the answer-key repository.
 
 > **Note**: NS-to-IP and MX-to-IP resolution is performed in a separate OpenINTEL infrastructure measurement dataset that is not publicly available. The zone-based data only contains NS *hostnames*, not their resolved IP addresses. In Task 2, you will resolve these hostnames yourself using `dnspython`.
 
