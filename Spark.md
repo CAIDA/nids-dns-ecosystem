@@ -1,4 +1,4 @@
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Spark ⮕ | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Spark ⮕ | [Tasks](Tasks.md) | [Task 1 Guide](Task-1-centralization.md) | [Task 2 Guide](Task-2-resilience.md) | [Task 3 Guide](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Spark Guide: Querying OpenINTEL with PySpark
 
@@ -291,4 +291,4 @@ for year, grp in provider_pd.groupby("year"):
   right. `.se` is the graded TLD — set `SOURCE = "se"` before your final run.
 - **Never `.toPandas()` an unfiltered DataFrame** — see §8.
 
-[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Spark ⮕ | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | [Datasets](Datasets.md) | Spark ⮕ | [Tasks](Tasks.md) | [Task 1 Guide](Task-1-centralization.md) | [Task 2 Guide](Task-2-resilience.md) | [Task 3 Guide](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)

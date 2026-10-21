@@ -1,4 +1,4 @@
-[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1 Guide](Task-1-centralization.md) | [Task 2 Guide](Task-2-resilience.md) | [Task 3 Guide](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
 
 # Datasets
 
@@ -156,4 +156,4 @@ def resolve_hostname(hostname, rdtype="A", timeout=5):
 
 The resolved hostname→IP mapping is then broadcast to all Spark workers as a `pyspark.broadcast` variable so it can be used efficiently in Spark UDFs without re-resolving on every row.
 
-[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1](Task-1-centralization.md) | [Task 2](Task-2-resilience.md) | [Task 3](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
+[README](README.md) | [Introduction](Introduction.md) | Datasets ⮕ | [Spark](Spark.md) | [Tasks](Tasks.md) | [Task 1 Guide](Task-1-centralization.md) | [Task 2 Guide](Task-2-resilience.md) | [Task 3 Guide](Task-3-security.md) | [Notebook](nids-dns-ecosystem.ipynb)
