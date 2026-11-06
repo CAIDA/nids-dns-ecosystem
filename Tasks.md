@@ -26,7 +26,7 @@ This module runs its queries under **Spark**, which needs a Java runtime — the
 
 ## Task 1: DNS Hosting Centralization
 
-Detailed guidance: [Task 1 — Centralization](Task-1-centralization.md)
+Detailed guidance: [Task 1 Guide](Task-1-centralization.md)
 
 ### Task 1.1 — Load and inspect NS records
 
@@ -62,7 +62,7 @@ Repeat the market share and HHI computation for annual snapshots (e.g., 2019–2
 
 ## Task 2: DNS Infrastructure Resilience & Anycast
 
-Detailed guidance: [Task 2 — Resilience & Anycast](Task-2-resilience.md)
+Detailed guidance: [Task 2 Guide](Task-2-resilience.md)
 
 ### Task 2.1 — NS server count per domain
 
@@ -94,7 +94,7 @@ Download the Anycast Census. Resolve the most common NS hostnames to IP addresse
 
 ## Task 3: DNS Security Best Practices
 
-Detailed guidance: [Task 3 — Security Best Practices](Task-3-security.md)
+Detailed guidance: [Task 3 Guide](Task-3-security.md)
 
 ### Task 3.1 — DNSSEC adoption
 
